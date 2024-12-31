@@ -1,10 +1,11 @@
-import MovieList from "./MovieList";
+import Student from "./Student";
 import "./index.css";
 function App() {
   return (
     <>
       <h1>Movies-App</h1>
-      <MovieList />
+      <Student name="Ajit" age={25} />
+      <Student name="Amit" age={22} />
     </>
   );
 }
