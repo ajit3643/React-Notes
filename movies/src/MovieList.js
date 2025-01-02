@@ -15,7 +15,7 @@ class MovieList extends React.Component{
                     'https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtNTdiOS00NGYwLWFmNTAtNThmYjU5ZGI2YTI1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg',
                   rating: '8.0',            
                   price: 99,            
-                  star: 0,
+                  stars: 0,
                   fav: false,
                   isInCart: false                  
                 },
@@ -27,14 +27,14 @@ class MovieList extends React.Component{
                     'https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_SX300.jpg',                  
                   rating: '9.0',            
                   price: 199,            
-                  star: 0,            
+                  stars: 0,            
                   fav: false,
                   isInCart: false                  
                 },
                 {
                   title: 'Iron Man',                 
                   plot:
-                    'After being held captive in an Afghan cave, billionaire engineer Tony Stark creates a unique weaponized suit of armor to fight evil.',                  
+                    'After being held captive in an Afghan cave, billionaire engineer Tony starsk creates a unique weaponized suit of armor to fight evil.',                  
                   poster:
                     'https://m.media-amazon.com/images/M/MV5BMTczNTI2ODUwOF5BMl5BanBnXkFtZTcwMTU0NTIzMw@@._V1_SX300.jpg',                  
                   rating: '7.9',            
@@ -45,6 +45,55 @@ class MovieList extends React.Component{
                 }]
         } 
   }
+
+  handleAddStars = (movie)=>{
+    const {movies} = this.state;
+    const movieId = movies.indexOf(movie);
+
+    if(movies[movieId].stars <5){
+        movies[movieId].stars += 0.5
+    }
+
+    this.setState({
+        movies
+    });
+  }
+
+  handleDecStars = (movie)=>{
+    const {movies} = this.state;
+    const movieId = movies.indexOf(movie);
+
+    if(movies[movieId].stars > 0){
+        movies[movieId].stars -= 0.5;
+    }
+
+    this.setState({
+        movies
+    })
+ 
+  }
+
+  handleToggleFav = (movie)=> {
+    const {movies} = this.state;
+    const movieId = movies.indexOf(movie);
+
+    movies[movieId].fav = !movies[movieId].fav;
+
+    this.setState({
+        movies
+    })
+  }
+
+  handleAddtocart = (movie)=> {
+    const {movies} = this.state;
+    const movieId = movies.indexOf(movie);
+
+    movies[movieId].isInCart = !movies[movieId].isInCart;
+
+    this.setState({
+        movies
+    })
+  }
     render(){
         const {movies} =  this.state;
           
@@ -52,7 +101,11 @@ class MovieList extends React.Component{
             <div className="main">
                 {movies.map((movie,index) => (
                 <MovieCard movies = {movie}
-                           key = {index}/>
+                           key = {index}
+                           onIncStars = {this.handleAddStars}
+                            onDecStars = {this.handleDecStars}
+                            onClickFav = {this.handleToggleFav}
+                            onClickAddtocart = {this.handleAddtocart}/>
 
             ))}              
             </div>

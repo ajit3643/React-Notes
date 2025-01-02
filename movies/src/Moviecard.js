@@ -1,58 +1,12 @@
 import React from "react";
 
 class MovieCard extends React.Component{
-   
-  //Creating an arrow function for addStars which automatically binds to the current instance
-  addStars = () => {
-    //Condition to stop the stars from increasing beyond 5
-    if(this.state.star >= 5){
-        return
-    }
-    //Form 1 of setState() - increasing the star count by 0.5
-    this.setState({
-        star : this.state.star + 0.5
-    })
-
-    //Form 2 of setState() - increasing the star count by 0.5
-    /**
-    this.setState((prevState) => {
-        return {
-            star: prevState + 0.5
-        }
-    })
-     */
-  }
-
-  // event handler to decrease the star by 0.5
-  decStars = () => {
-    //Condition to stop the stars from decreasing beyond 0
-    if(this.state.star <= 0){
-        return
-    }
-    //form1 of setState
-    this.setState({
-        star: this.state.star - 0.5
-    })
-  }
-
-  //Toggle Favourite button
-  toggleFav= () => {
-    this.setState({
-        fav: !this.state.fav
-    })
-  }
-  
-  //Toggle add to cart button
-  toggleCart= () => {
-    this.setState({
-        isInCart: !this.state.isInCart
-    })
- }
 
     render(){
-        //Destructing the state object in render function
-        const {title, plot, poster, price, rating,star,fav,isInCart} =  this.props.movies;
-        console.log(this.props.movies)
+        
+        const {movies, onIncStars, onClickFav, onClickAddtocart, onDecStars} =  this.props
+        const {title, plot, poster, price, rating,stars,fav,isInCart} =  this.props.movies;
+        
           
         return(
             //Movie Card
@@ -80,7 +34,7 @@ class MovieCard extends React.Component{
                             <img className="str-btn" 
                                 alt="Decrease" 
                                 src="https://cdn-icons-png.flaticon.com/128/2801/2801932.png" 
-                                onClick={this.decStars}
+                                onClick={() => onDecStars(movies)}
                             />
                             <img className="stars" 
                                     alt="stars" 
@@ -90,23 +44,25 @@ class MovieCard extends React.Component{
                                 alt="increase" 
                                 src="https://cdn-icons-png.flaticon.com/128/2997/2997933.png" 
                                 // No binding required as addStars() is an arrow function
-                                onClick={this.addStars}
+                                onClick={() => onIncStars(movies)}
                             />
-                            <span className="starCount">{star}</span>
+                            <span className="starCount">{stars}</span>
                         </div>
 
                         {/**conditional rendering on Favourite button */}
-                        <button className={fav?"unfavourite-btn":"favourite-btn"}  onClick={this.toggleFav}>
-                            {fav ? "Un-favourite":"Favourite"}
-                        </button>
-                        {/**
-                         * {fav? <button className="unfavourite-btn" onClick={this.toggleFav}> Un-favourite </button> :
-                         *       <button className="favourite-btn" onClick={this.toggleFav}> favourite </button>}
-                         */}
+                        <button className={fav?"unfavourite-btn":"favourite-btn"}  
+                                onClick={() => onClickFav(movies)}> 
+                                    
+                                    {fav ? "Un-favourite":"Favourite"}
 
-                            {/**Conditional Rendering on Add to Cart Button */}
-                        <button className={isInCart?"unfavourite-btn":"cart-btn"}  onClick={this.toggleCart}>
-                            {isInCart ? "Remove from Cart":"Add to Cart"}
+                        </button>
+                            
+                        {/**Conditional Rendering on Add to Cart Button */}
+                        <button className={isInCart?"unfavourite-btn":"cart-btn"}  
+                                onClick={() => onClickAddtocart(movies)}>
+                                    
+                                        {isInCart ? "Remove from Cart":"Add to Cart"}
+
                         </button>
                         
                     </div>
