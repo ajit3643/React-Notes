@@ -1,12 +1,10 @@
 import React, { Component } from "react";
 
 class Navbar extends Component {
-
   render() {
-
     return (
       <div style={styles.nav}>
-        <div style = {styles.title}>Movie-App</div>
+        <div style={styles.title}>Movie-App</div>
         <div style={styles.cartIconContainer}>
           <img
             style={styles.cartIcon}
@@ -29,19 +27,19 @@ const styles = {
     height: 70,
     background: "#4267b2",
     display: "flex",
-    justifyContent: "space-between" ,
+    justifyContent: "space-between",
     alignItems: "center",
     position: "relative",
   },
-  title:{
+  title: {
     fontSize: 30,
     color: "#fff",
     fontWeight: 600,
     fontFamily: '"Montserrat", sans-serif',
     textTransform: "uppercase",
-    marginLeft: 20
+    marginLeft: 20,
   },
-  
+
   cartIconContainer: {
     position: "relative",
     cursor: "pointer",
