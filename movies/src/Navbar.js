@@ -1,9 +1,18 @@
 import React, { Component } from "react";
+import styled from "styled-components";
+
+const Nav = styled.div`
+  height: 70px;
+  width: 100%;
+  background: #4267b2;
+  display: flex;
+  justify-content: space-between;
+`;
 
 class Navbar extends Component {
   render() {
     return (
-      <div style={styles.nav}>
+      <Nav>
         <div style={styles.title}>Movie-App</div>
         <div style={styles.cartIconContainer}>
           <img
@@ -13,7 +22,7 @@ class Navbar extends Component {
           />
           <span style={styles.cartCount}>3</span>
         </div>
-      </div>
+      </Nav>
     );
   }
 }
