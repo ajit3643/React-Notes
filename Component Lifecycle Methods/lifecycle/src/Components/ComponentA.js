@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import ComponentB from './ComponentB';
+import ComponentB from "./ComponentB";
 
 class ComponentA extends Component {
   constructor(props) {
@@ -36,7 +36,7 @@ class ComponentA extends Component {
             return <li>{d.username}</li>;
           })}
         </ul>
-        {/* <ComponentB/> */}
+        <ComponentB />
       </>
     );
   }

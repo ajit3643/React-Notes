@@ -15,7 +15,8 @@ function MovieList(props){
                         onClickFav = {onClickFav}
                         onClickAddtocart = {onClickAddtocart}/>
 
-        ))}              
+        ))}      
+                
         </div>
     )
 }
