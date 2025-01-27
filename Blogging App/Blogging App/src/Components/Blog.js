@@ -1,12 +1,14 @@
 //Blogging App using Hooks
 
-import { useState } from "react"; //Importing useState hook from react library
+import { useState, useRef } from "react"; //Importing useState hook from react library
 export default function Blog() {
   //   const [title, setTitle] = useState("");
   //   const [content, setContent] = useState("");
 
   const [formData, setFormData] = useState({ title: "", content: "" });
   const [blogs, setBlogs] = useState([]); //State variable to store the list of blogs
+  const titleRef = useRef(null);
+
   //Passing the synthetic event as argument to stop refreshing the page on submit
   function handleSubmit(e) {
     e.preventDefault();
@@ -14,6 +16,7 @@ export default function Blog() {
     //Creating a new blog object with title and content
     setBlogs([{ title: formData.title, content: formData.content }, ...blogs]);
     setFormData({ title: "", content: "" });
+    titleRef.current.focus();
     console.log(blogs);
   }
 
@@ -36,6 +39,7 @@ export default function Blog() {
               className="input"
               placeholder="Enter the Title of the Blog here.."
               value={formData.title}
+              ref={titleRef}
               onChange={(e) =>
                 setFormData({
                   title: e.target.value,
