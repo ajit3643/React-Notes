@@ -12,7 +12,7 @@ export default function Blog() {
     e.preventDefault();
 
     //Creating a new blog object with title and content
-    setBlogs([...blogs, { title: formData.title, content: formData.content }]);
+    setBlogs([{ title: formData.title, content: formData.content }, ...blogs]);
     setFormData({ title: "", content: "" });
     console.log(blogs);
   }
@@ -33,7 +33,10 @@ export default function Blog() {
               placeholder="Enter the Title of the Blog here.."
               value={formData.title}
               onChange={(e) =>
-                formData({ title: e.target.value, content: formData.content })
+                setFormData({
+                  title: e.target.value,
+                  content: formData.content,
+                })
               }
             />
           </Row>
@@ -45,7 +48,7 @@ export default function Blog() {
               placeholder="Content of the Blog goes here.."
               value={formData.content}
               onChange={(e) =>
-                setFormData({ content: e.target.value, title: formData.title })
+                setFormData({ title: formData.title, content: e.target.value })
               }
             />
           </Row>
