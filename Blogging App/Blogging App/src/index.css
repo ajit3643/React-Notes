@@ -14,7 +14,7 @@
 
 .blog {
   max-width: 60%;
-  background: -moz-linear-gradient(right, #565318, #3c464e);
+  background-color: #f0f0f0;
   color: black;
   font-weight: lighter;
   border: 1px black solid;
@@ -25,6 +25,7 @@
   display: block;
   padding-left: 10px;
   max-width: 60%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 .input {
   min-height: 34px;
