@@ -4,10 +4,14 @@ import { useState } from "react"; //Importing useState hook from react library
 export default function Blog() {
   const [title, setTitle] = useState(""); //State variable to store the title of the blog
   const [content, setContent] = useState(""); //State variable to store the content of the blog
-
+  const [blogs, setBlogs] = useState([]); //State variable to store the list of blogs
   //Passing the synthetic event as argument to stop refreshing the page on submit
   function handleSubmit(e) {
     e.preventDefault();
+
+    //Creating a new blog object with title and content
+    setBlogs([...blogs, { title, content }]);
+    console.log(blogs);
   }
 
   return (
@@ -48,8 +52,12 @@ export default function Blog() {
 
       {/* Section where submitted blogs will be displayed */}
       <h2> Blogs </h2>
-      <h3>{title}</h3>
-      <p>{content}</p>
+      {blogs.map((blog, index) => (
+        <div className="blog" key={index}>
+          <h3>{blog.title}</h3>
+          <p>{blog.content}</p>
+        </div>
+      ))}
     </>
   );
 }
