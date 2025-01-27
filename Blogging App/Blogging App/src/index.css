@@ -3,7 +3,7 @@
   padding-left: 15px;
   margin: auto;
   max-width: 60%;
-  background-color: rgb(215, 104, 6);
+  background: -webkit-linear-gradient(right, #565318, #3c464e);
   color: white;
   border-radius: 10px;
   font-weight: bolder;
@@ -14,7 +14,7 @@
 
 .blog {
   max-width: 60%;
-  background-color: rgb(192, 237, 236);
+  background: -moz-linear-gradient(right, #565318, #3c464e);
   color: black;
   font-weight: lighter;
   border: 1px black solid;
@@ -71,6 +71,10 @@ h1 {
   height: 30px;
   font-size: 15px;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  cursor: pointer;
+}
+.btn:hover {
+  background-color: skyblue;
 }
 
 .remove {

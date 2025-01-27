@@ -2,15 +2,18 @@
 
 import { useState } from "react"; //Importing useState hook from react library
 export default function Blog() {
-  const [title, setTitle] = useState(""); //State variable to store the title of the blog
-  const [content, setContent] = useState(""); //State variable to store the content of the blog
+  //   const [title, setTitle] = useState("");
+  //   const [content, setContent] = useState("");
+
+  const [formData, setFormData] = useState({ title: "", content: "" });
   const [blogs, setBlogs] = useState([]); //State variable to store the list of blogs
   //Passing the synthetic event as argument to stop refreshing the page on submit
   function handleSubmit(e) {
     e.preventDefault();
 
     //Creating a new blog object with title and content
-    setBlogs([...blogs, { title, content }]);
+    setBlogs([...blogs, { title: formData.title, content: formData.content }]);
+    setFormData({ title: "", content: "" });
     console.log(blogs);
   }
 
@@ -28,8 +31,10 @@ export default function Blog() {
             <input
               className="input"
               placeholder="Enter the Title of the Blog here.."
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              value={formData.title}
+              onChange={(e) =>
+                formData({ title: e.target.value, content: formData.content })
+              }
             />
           </Row>
 
@@ -38,8 +43,10 @@ export default function Blog() {
             <textarea
               className="input content"
               placeholder="Content of the Blog goes here.."
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
+              value={formData.content}
+              onChange={(e) =>
+                setFormData({ content: e.target.value, title: formData.title })
+              }
             />
           </Row>
 
