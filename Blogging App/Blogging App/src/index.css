@@ -78,8 +78,17 @@ h1 {
 }
 
 .remove {
-  background-color: rgb(230, 83, 83);
+  background-color: rgb(255, 0, 0);
   width: fit-content;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+.remove:hover {
+  background-color: rgb(230, 83, 83);
 }
 
 .blog-btn {
