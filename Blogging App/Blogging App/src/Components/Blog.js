@@ -1,12 +1,26 @@
 //Blogging App using Hooks
+//Importing useState hook from react library
+import { useState, useRef, useEffect, useReducer } from "react";
 
-import { useState, useRef, useEffect } from "react"; //Importing useState hook from react library
+//Reducer function to manage the state of the blogs
+function blogsReducer(state, action) {
+  switch (action.type) {
+    case "ADD_BLOG":
+      return [action.blog, ...state];
+    case "REMOVE_BLOG":
+      return state.filter((blog, index) => index !== action.index);
+    default:
+      return state;
+  }
+}
+
 export default function Blog() {
   //   const [title, setTitle] = useState("");
   //   const [content, setContent] = useState("");
 
   const [formData, setFormData] = useState({ title: "", content: "" });
-  const [blogs, setBlogs] = useState([]); //State variable to store the list of blogs
+  // const [blogs, setBlogs] = useState([]); //State variable to store the list of blogs
+  const [blogs, dispatch] = useReducer(blogsReducer, []); //State variable to store the list of blogs
   const titleRef = useRef(null);
 
   useEffect(() => {
@@ -26,7 +40,14 @@ export default function Blog() {
     e.preventDefault();
 
     //Creating a new blog object with title and content
-    setBlogs([{ title: formData.title, content: formData.content }, ...blogs]);
+    //setBlogs([{ title: formData.title, content: formData.content }, ...blogs]);
+
+    //Dispatching the action to add the blog
+    dispatch({
+      type: "ADD_BLOG",
+      blog: { title: formData.title, content: formData.content },
+    });
+
     setFormData({ title: "", content: "" });
     titleRef.current.focus();
     console.log(blogs);
@@ -34,7 +55,8 @@ export default function Blog() {
 
   //Function to remove the blog from the list
   function removeBlog(index) {
-    setBlogs(blogs.filter((blog, i) => i !== index));
+    // setBlogs(blogs.filter((blog, i) => i !== index));
+    dispatch({ type: "REMOVE_BLOG", index });
   }
   return (
     <>
