@@ -1,6 +1,8 @@
 //Blogging App using Hooks
 //Importing useState hook from react library
 import { useState, useRef, useEffect, useReducer } from "react";
+import { db } from "../firebaseinit";
+import { collection, addDoc } from "firebase/firestore";
 
 //Reducer function to manage the state of the blogs
 function blogsReducer(state, action) {
@@ -36,11 +38,19 @@ export default function Blog() {
   }, [blogs]);
 
   //Passing the synthetic event as argument to stop refreshing the page on submit
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
 
     //Creating a new blog object with title and content
     //setBlogs([{ title: formData.title, content: formData.content }, ...blogs]);
+
+    // Add a new document with a generated id.
+    const docRef = await addDoc(collection(db, "blogs"), {
+      title: formData.title,
+      content: formData.content,
+      createdOn: new Date(),
+    });
+    // console.log("Document written with ID: ", docRef.id);
 
     //Dispatching the action to add the blog
     dispatch({
