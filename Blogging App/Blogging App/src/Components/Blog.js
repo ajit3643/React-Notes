@@ -2,7 +2,7 @@
 //Importing useState hook from react library
 import { useState, useRef, useEffect, useReducer } from "react";
 import { db } from "../firebaseinit";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, doc, setDoc } from "firebase/firestore";
 
 //Reducer function to manage the state of the blogs
 function blogsReducer(state, action) {
@@ -45,12 +45,15 @@ export default function Blog() {
     //setBlogs([{ title: formData.title, content: formData.content }, ...blogs]);
 
     // Add a new document with a generated id.
-    const docRef = await addDoc(collection(db, "blogs"), {
+
+    const docRef = await doc(collection(db, "blogs"));
+    // setDoc....
+    await setDoc(docRef, {
       title: formData.title,
       content: formData.content,
       createdOn: new Date(),
     });
-    console.log("Document written with ID: ", docRef.id);
+    // console.log("Document written with ID: ", docRef.id);
 
     //Dispatching the action to add the blog
     dispatch({
