@@ -50,7 +50,7 @@ export default function Blog() {
       content: formData.content,
       createdOn: new Date(),
     });
-    // console.log("Document written with ID: ", docRef.id);
+    console.log("Document written with ID: ", docRef.id);
 
     //Dispatching the action to add the blog
     dispatch({
